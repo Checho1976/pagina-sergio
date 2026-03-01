@@ -1,0 +1,454 @@
+/**
+ * script.js
+ * Nicolás Ferreiro — Servicios del Hogar
+ * ─────────────────────────────────────────
+ * Módulos:
+ *   1. Proyectos dinámicos
+ *   2. Header scrolleado
+ *   3. Menú móvil
+ *   4. Scroll reveal
+ *   5. Microinteracciones
+ *   6. Footer año dinámico
+ *   7. Smooth scroll a anclas
+ * ─────────────────────────────────────────
+ */
+
+'use strict';
+
+/* ================================================================
+  1. PROYECTOS — Datos y renderizado dinámico
+================================================================ */
+
+/**
+ * Array de proyectos.
+ * Para ocultar la sección, dejarlo vacío: []
+ * Cada objeto admite: { titulo, categoria, descripcion, imagen, alt }
+ * "imagen" puede ser una URL real o una ruta local.
+ */
+const PROYECTOS = [
+  {
+    titulo:      'Remodelación cielorraso · Pocitos',
+    categoria:   'Construcción en Yeso',
+    descripcion: 'Cielorraso liso y molduras perimetrales en dormitorio principal. Terminación impecable lista para pintar.',
+    imagen:      'https://images.unsplash.com/photo-1604014237744-30dce9b2edbb?w=640&q=80&auto=format&fit=crop',
+    alt:         'Cielorraso de yeso terminado en habitación moderna',
+  },
+  {
+    titulo:      'Tablero eléctrico · Malvín',
+    categoria:   'Instalación Eléctrica',
+    descripcion: 'Renovación completa del tablero principal con disyuntores y protección diferencial. Instalación certificada.',
+    imagen:      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=640&q=80&auto=format&fit=crop',
+    alt:         'Tablero eléctrico residencial instalado',
+  },
+  {
+    titulo:      'Jardín diseñado · Carrasco',
+    categoria:   'Mantenimiento de Jardines',
+    descripcion: 'Diseño de canteros, césped nivelado y poda de setos. Mantenimiento mensual incluido.',
+    imagen:      'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=640&q=80&auto=format&fit=crop',
+    alt:         'Jardín residencial bien mantenido con canteros',
+  },
+  {
+    titulo:      'Refacción integral · Prado',
+    categoria:   'Mantenimiento General',
+    descripcion: 'Cambio de cerámicas, pintura interior y reparaciones de plomería en baño y cocina.',
+    imagen:      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=640&q=80&auto=format&fit=crop',
+    alt:         'Baño renovado con cerámica nueva',
+  },
+  {
+    titulo:      'Tabique divisorio · Centro',
+    categoria:   'Construcción en Yeso',
+    descripcion: 'Tabique de yeso para dividir ambientes en oficina de 45 m². Instalado en un día de trabajo.',
+    imagen:      'https://images.unsplash.com/photo-1590422749897-47036da0b0ff?w=640&q=80&auto=format&fit=crop',
+    alt:         'Tabique de yeso en oficina',
+  },
+  {
+    titulo:      'Iluminación exterior · Buceo',
+    categoria:   'Instalación Eléctrica',
+    descripcion: 'Circuito de iluminación LED para perímetro de casa y jardín. Ahorro del 60 % en consumo.',
+    imagen:      'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=640&q=80&auto=format&fit=crop',
+    alt:         'Iluminación LED exterior residencial',
+  },
+];
+
+/**
+ * Crea el HTML de una tarjeta de proyecto.
+ * @param {Object} proyecto
+ * @param {number} index — usado para el delay de animación reveal
+ * @returns {string} HTML string
+ */
+function crearTarjetaProyecto(proyecto, index) {
+  const delay = (index % 3) * 0.12; // escalonado por columna
+  return `
+    <article
+      class="proyecto-card reveal"
+      style="transition-delay: ${delay}s"
+      role="listitem"
+      aria-label="${proyecto.titulo}"
+    >
+      <div class="proyecto-img-wrap">
+        <img
+          class="proyecto-img"
+          src="${proyecto.imagen}"
+          alt="${proyecto.alt}"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <div class="proyecto-body">
+        <p class="proyecto-tag">${proyecto.categoria}</p>
+        <h3 class="proyecto-title">${proyecto.titulo}</h3>
+        <p class="proyecto-desc">${proyecto.descripcion}</p>
+      </div>
+    </article>
+  `.trim();
+}
+
+/**
+ * Renderiza los proyectos en el DOM.
+ * Oculta la sección si no hay proyectos.
+ */
+function inicializarProyectos() {
+  const seccion = document.getElementById('proyectos');
+  const grid    = document.getElementById('proyectos-grid');
+
+  if (!seccion || !grid) return;
+
+  if (!PROYECTOS || PROYECTOS.length === 0) {
+    // Sin proyectos → sección invisible y fuera del flujo
+    seccion.hidden = true;
+    return;
+  }
+
+  // Hay proyectos → mostrar sección
+  seccion.hidden = false;
+
+  const fragment = document.createDocumentFragment();
+  const wrapper  = document.createElement('div');
+
+  wrapper.innerHTML = PROYECTOS
+    .map((proyecto, i) => crearTarjetaProyecto(proyecto, i))
+    .join('');
+
+  Array.from(wrapper.children).forEach(el => fragment.appendChild(el));
+  grid.appendChild(fragment);
+}
+
+
+/* ================================================================
+   2. HEADER — Clase "scrolled" al hacer scroll
+================================================================ */
+
+function inicializarHeader() {
+  const header    = document.querySelector('.site-header');
+  if (!header) return;
+
+  const umbral = 60; // px desde el top
+
+  function actualizarHeader() {
+    header.classList.toggle('scrolled', window.scrollY > umbral);
+  }
+
+  // Estado inicial (útil si la página se carga con scroll)
+  actualizarHeader();
+
+  window.addEventListener('scroll', actualizarHeader, { passive: true });
+}
+
+
+/* ================================================================
+   3. MENÚ MÓVIL — Toggle hamburger
+================================================================ */
+
+function inicializarMenuMovil() {
+  const toggle = document.querySelector('.nav-toggle');
+  const nav    = document.querySelector('.main-nav');
+  const body   = document.body;
+
+  if (!toggle || !nav) return;
+
+  function abrirMenu() {
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.classList.add('is-open');
+    nav.classList.add('is-open');
+    body.style.overflow = 'hidden'; // bloquear scroll de fondo
+  }
+
+  function cerrarMenu() {
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.classList.remove('is-open');
+    nav.classList.remove('is-open');
+    body.style.overflow = '';
+  }
+
+  toggle.addEventListener('click', () => {
+    const estaAbierto = toggle.getAttribute('aria-expanded') === 'true';
+    estaAbierto ? cerrarMenu() : abrirMenu();
+  });
+
+  // Cerrar al hacer click en un enlace del menú
+  nav.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', cerrarMenu);
+  });
+
+  // Cerrar con Escape
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && toggle.getAttribute('aria-expanded') === 'true') {
+      cerrarMenu();
+      toggle.focus();
+    }
+  });
+
+  // Cerrar si se cambia a desktop
+  const mq = window.matchMedia('(min-width: 1024px)');
+  mq.addEventListener('change', e => { if (e.matches) cerrarMenu(); });
+}
+
+
+/* ================================================================
+   4. SCROLL REVEAL — Intersection Observer
+================================================================ */
+
+function inicializarScrollReveal() {
+  const elementos = document.querySelectorAll(
+    '.servicio-card, .proceso-step, .proyecto-card, .channel-card, .section-header, .hero-trust'
+  );
+
+  if (!elementos.length) return;
+
+  // Marcar todos con la clase base para animación CSS
+  elementos.forEach(el => {
+    if (!el.classList.contains('reveal')) {
+      el.classList.add('reveal');
+    }
+  });
+
+  const opciones = {
+    root:       null,
+    rootMargin: '0px 0px -60px 0px',
+    threshold:  0.08,
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target); // una sola vez
+      }
+    });
+  }, opciones);
+
+  elementos.forEach(el => observer.observe(el));
+}
+
+
+/* ================================================================
+   5. MICROINTERACCIONES
+================================================================ */
+
+/**
+ * Efecto tilt sutil en tarjetas de servicios (solo desktop).
+ * Se cancela automáticamente en dispositivos táctiles.
+ */
+function inicializarTiltCards() {
+  if (window.matchMedia('(hover: none)').matches) return; // touch → skip
+
+  const tarjetas = document.querySelectorAll('.servicio-card');
+
+  tarjetas.forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const rect   = card.getBoundingClientRect();
+      const cx     = rect.left + rect.width  / 2;
+      const cy     = rect.top  + rect.height / 2;
+      const dx     = (e.clientX - cx) / (rect.width  / 2); // -1 a 1
+      const dy     = (e.clientY - cy) / (rect.height / 2); // -1 a 1
+      const rotX   =  dy * -4;  // grados
+      const rotY   =  dx *  4;
+
+      card.style.transform = `
+        translateY(-5px)
+        rotateX(${rotX}deg)
+        rotateY(${rotY}deg)
+        scale(1.01)
+      `;
+      card.style.transition = 'transform 0.1s ease';
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+      card.style.transition = 'transform 0.4s cubic-bezier(0.22,1,0.36,1)';
+    });
+  });
+}
+
+/**
+ * Efecto ripple en botones principales.
+ */
+function inicializarRipple() {
+  const botones = document.querySelectorAll('.btn-primary, .channel-card');
+
+  botones.forEach(btn => {
+    btn.addEventListener('click', function (e) {
+      const rect   = this.getBoundingClientRect();
+      const x      = e.clientX - rect.left;
+      const y      = e.clientY - rect.top;
+      const ripple = document.createElement('span');
+
+      ripple.className = 'ripple-effect';
+      ripple.style.cssText = `
+        position: absolute;
+        left: ${x}px;
+        top: ${y}px;
+        width: 10px;
+        height: 10px;
+        transform: translate(-50%, -50%) scale(0);
+        border-radius: 50%;
+        background: rgba(255,255,255,0.25);
+        animation: rippleAnim 0.55s ease-out forwards;
+        pointer-events: none;
+        z-index: 10;
+      `;
+
+      // Asegurar posición relativa en el botón
+      const pos = getComputedStyle(this).position;
+      if (pos === 'static') this.style.position = 'relative';
+      this.style.overflow = 'hidden';
+
+      this.appendChild(ripple);
+      ripple.addEventListener('animationend', () => ripple.remove());
+    });
+  });
+
+  // Inyectar keyframe una sola vez
+  if (!document.getElementById('ripple-style')) {
+    const style = document.createElement('style');
+    style.id = 'ripple-style';
+    style.textContent = `
+      @keyframes rippleAnim {
+        to {
+          transform: translate(-50%, -50%) scale(28);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+  }
+}
+
+/**
+ * Efecto de contador animado en los indicadores del hero.
+ * Ej: "+8 años" → cuenta del 0 al 8.
+ */
+function inicializarContadores() {
+  const items = document.querySelectorAll('.trust-item strong');
+  if (!items.length) return;
+
+  const re = /(\+?)(\d+)(.*)/; // captura número y texto alrededor
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+
+      const el    = entry.target;
+      const texto = el.textContent.trim();
+      const match = texto.match(re);
+
+      if (!match) return;
+
+      const prefijo = match[1];       // "+" o ""
+      const destino = parseInt(match[2], 10);
+      const sufijo  = match[3];       // " años", etc.
+      const duracion = 1400;          // ms
+      const inicio   = performance.now();
+
+      function animar(tiempo) {
+        const progreso = Math.min((tiempo - inicio) / duracion, 1);
+        // easeOutQuart
+        const ease     = 1 - Math.pow(1 - progreso, 4);
+        const actual   = Math.floor(ease * destino);
+
+        el.textContent = `${prefijo}${actual}${sufijo}`;
+
+        if (progreso < 1) {
+          requestAnimationFrame(animar);
+        } else {
+          el.textContent = texto; // restaurar valor exacto
+        }
+      }
+
+      requestAnimationFrame(animar);
+      observer.unobserve(el);
+    });
+  }, { threshold: 0.8 });
+
+  items.forEach(el => {
+    if (re.test(el.textContent.trim())) observer.observe(el);
+  });
+}
+
+
+/* ================================================================
+   6. FOOTER — Año dinámico
+================================================================ */
+
+function inicializarAnio() {
+  const el = document.getElementById('year');
+  if (el) el.textContent = new Date().getFullYear();
+}
+
+
+/* ================================================================
+   7. SMOOTH SCROLL — Anclas internas
+================================================================ */
+
+function inicializarSmoothScroll() {
+  document.querySelectorAll('a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function (e) {
+      const hash   = this.getAttribute('href');
+      if (hash === '#') return;
+
+      const destino = document.querySelector(hash);
+      if (!destino) return;
+
+      e.preventDefault();
+
+      const headerH  = parseInt(
+        getComputedStyle(document.documentElement).getPropertyValue('--header-h') || '68',
+        10
+      );
+      const top = destino.getBoundingClientRect().top + window.scrollY - headerH;
+
+      window.scrollTo({ top, behavior: 'smooth' });
+
+      // Actualizar URL sin saltar
+      history.pushState(null, '', hash);
+    });
+  });
+}
+
+
+/* ================================================================
+   INIT — Punto de entrada principal
+================================================================ */
+
+function init() {
+  inicializarAnio();
+  inicializarProyectos();
+  inicializarHeader();
+  inicializarMenuMovil();
+  inicializarSmoothScroll();
+
+  // Diferir lo visual para no bloquear el primer pintado
+  requestAnimationFrame(() => {
+    inicializarScrollReveal();
+    inicializarTiltCards();
+    inicializarRipple();
+    inicializarContadores();
+  });
+}
+
+// Esperar al DOM listo
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
