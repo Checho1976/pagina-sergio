@@ -1,6 +1,6 @@
 /**
  * script.js
- * Sergio Piñeiro — Servicios del Hogar
+ * Servicios Personalizados — Servicios del Hogar
  * ─────────────────────────────────────────
  * Módulos:
  *   1. Proyectos dinámicos
@@ -25,7 +25,7 @@
  * Cada objeto admite: { titulo, categoria, descripcion, imagen, alt }
  * "imagen" puede ser una URL real o una ruta local.
  */
-const PROYECTOS = [
+/*const PROYECTOS = [
 
   // ─────────────────────────────────────────────────────────────────
   // CÓMO AGREGAR TUS FOTOS:
@@ -148,7 +148,7 @@ function inicializarProyectos() {
   Array.from(wrapper.children).forEach(el => fragment.appendChild(el));
   grid.appendChild(fragment);
 }
-
+*/
 
 /* ================================================================
   2. HEADER — Clase "scrolled" al hacer scroll
