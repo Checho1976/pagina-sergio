@@ -1,6 +1,6 @@
 /**
  * script.js
- * Nicolás Ferreiro — Servicios del Hogar
+ * Sergio Piñeiro — Servicios del Hogar
  * ─────────────────────────────────────────
  * Módulos:
  *   1. Proyectos dinámicos
@@ -26,48 +26,64 @@
  * "imagen" puede ser una URL real o una ruta local.
  */
 const PROYECTOS = [
+
+  // ─────────────────────────────────────────────────────────────────
+  // CÓMO AGREGAR TUS FOTOS:
+  //
+  // En el campo "imagen" podés poner:
+  //   • Una ruta local:  'fotos/trabajo1.jpg'
+  //     (la foto tiene que estar en una carpeta "fotos" junto al index.html)
+  //   • Una URL directa: 'https://ejemplo.com/foto.jpg'
+  //
+  // Recomendación de tamaño: mínimo 800×600 px, formato JPG o WEBP.
+  // ─────────────────────────────────────────────────────────────────
+
   {
-    titulo:      'Remodelación cielorraso · Pocitos',
+    titulo:      'REEMPLAZÁ: nombre del trabajo · barrio',  // ← cambiá esto
+    categoria:   'Electricidad',                             // ← categoría del servicio
+    descripcion: 'REEMPLAZÁ: descripción breve del trabajo realizado.',
+    imagen:      'fotos/proyecto-01.jpg',                    // ← ruta o URL de tu foto
+    alt:         'Descripción de la foto para accesibilidad',
+  },
+  {
+    titulo:      'REEMPLAZÁ: nombre del trabajo · barrio',
     categoria:   'Construcción en Yeso',
-    descripcion: 'Cielorraso liso y molduras perimetrales en dormitorio principal. Terminación impecable lista para pintar.',
-    imagen:      'https://images.unsplash.com/photo-1604014237744-30dce9b2edbb?w=640&q=80&auto=format&fit=crop',
-    alt:         'Cielorraso de yeso terminado en habitación moderna',
+    descripcion: 'REEMPLAZÁ: descripción breve del trabajo realizado.',
+    imagen:      'fotos/proyecto-02.jpg',
+    alt:         'Descripción de la foto para accesibilidad',
   },
   {
-    titulo:      'Tablero eléctrico · Malvín',
-    categoria:   'Instalación Eléctrica',
-    descripcion: 'Renovación completa del tablero principal con disyuntores y protección diferencial. Instalación certificada.',
-    imagen:      'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=640&q=80&auto=format&fit=crop',
-    alt:         'Tablero eléctrico residencial instalado',
+    titulo:      'REEMPLAZÁ: nombre del trabajo · barrio',
+    categoria:   'Automatismos y Portones',
+    descripcion: 'REEMPLAZÁ: descripción breve del trabajo realizado.',
+    imagen:      'fotos/proyecto-03.jpg',
+    alt:         'Descripción de la foto para accesibilidad',
   },
   {
-    titulo:      'Jardín diseñado · Carrasco',
-    categoria:   'Mantenimiento de Jardines',
-    descripcion: 'Diseño de canteros, césped nivelado y poda de setos. Mantenimiento mensual incluido.',
-    imagen:      'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=640&q=80&auto=format&fit=crop',
-    alt:         'Jardín residencial bien mantenido con canteros',
+    titulo:      'REEMPLAZÁ: nombre del trabajo · barrio',
+    categoria:   'Jardines y Espacios Verdes',
+    descripcion: 'REEMPLAZÁ: descripción breve del trabajo realizado.',
+    imagen:      'fotos/proyecto-04.jpg',
+    alt:         'Descripción de la foto para accesibilidad',
   },
   {
-    titulo:      'Refacción integral · Prado',
-    categoria:   'Mantenimiento General',
-    descripcion: 'Cambio de cerámicas, pintura interior y reparaciones de plomería en baño y cocina.',
-    imagen:      'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=640&q=80&auto=format&fit=crop',
-    alt:         'Baño renovado con cerámica nueva',
+    titulo:      'REEMPLAZÁ: nombre del trabajo · barrio',
+    categoria:   'Pintura y Pisos',
+    descripcion: 'REEMPLAZÁ: descripción breve del trabajo realizado.',
+    imagen:      'fotos/proyecto-05.jpg',
+    alt:         'Descripción de la foto para accesibilidad',
   },
   {
-    titulo:      'Tabique divisorio · Centro',
-    categoria:   'Construcción en Yeso',
-    descripcion: 'Tabique de yeso para dividir ambientes en oficina de 45 m². Instalado en un día de trabajo.',
-    imagen:      'https://images.unsplash.com/photo-1590422749897-47036da0b0ff?w=640&q=80&auto=format&fit=crop',
-    alt:         'Tabique de yeso en oficina',
+    titulo:      'REEMPLAZÁ: nombre del trabajo · barrio',
+    categoria:   'Plomería y Mantenimiento',
+    descripcion: 'REEMPLAZÁ: descripción breve del trabajo realizado.',
+    imagen:      'fotos/proyecto-06.jpg',
+    alt:         'Descripción de la foto para accesibilidad',
   },
-  {
-    titulo:      'Iluminación exterior · Buceo',
-    categoria:   'Instalación Eléctrica',
-    descripcion: 'Circuito de iluminación LED para perímetro de casa y jardín. Ahorro del 60 % en consumo.',
-    imagen:      'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=640&q=80&auto=format&fit=crop',
-    alt:         'Iluminación LED exterior residencial',
-  },
+
+  // ¿Más proyectos? Copiá uno de los bloques de arriba y pegalo acá.
+  // La grilla se ajusta sola.
+
 ];
 
 /**
@@ -135,7 +151,7 @@ function inicializarProyectos() {
 
 
 /* ================================================================
-   2. HEADER — Clase "scrolled" al hacer scroll
+  2. HEADER — Clase "scrolled" al hacer scroll
 ================================================================ */
 
 function inicializarHeader() {
@@ -156,12 +172,13 @@ function inicializarHeader() {
 
 
 /* ================================================================
-   3. MENÚ MÓVIL — Toggle hamburger
+  3. MENÚ MÓVIL — Toggle hamburger
 ================================================================ */
 
 function inicializarMenuMovil() {
   const toggle = document.querySelector('.nav-toggle');
   const nav    = document.querySelector('.main-nav');
+  const header = document.querySelector('.site-header');
   const body   = document.body;
 
   if (!toggle || !nav) return;
@@ -170,7 +187,8 @@ function inicializarMenuMovil() {
     toggle.setAttribute('aria-expanded', 'true');
     toggle.classList.add('is-open');
     nav.classList.add('is-open');
-    body.style.overflow = 'hidden'; // bloquear scroll de fondo
+    body.style.overflow = 'hidden';
+    header.style.zIndex = '300';
   }
 
   function cerrarMenu() {
@@ -178,6 +196,7 @@ function inicializarMenuMovil() {
     toggle.classList.remove('is-open');
     nav.classList.remove('is-open');
     body.style.overflow = '';
+    header.style.zIndex = '';
   }
 
   toggle.addEventListener('click', () => {
@@ -205,7 +224,7 @@ function inicializarMenuMovil() {
 
 
 /* ================================================================
-   4. SCROLL REVEAL — Intersection Observer
+  4. SCROLL REVEAL — Intersection Observer
 ================================================================ */
 
 function inicializarScrollReveal() {
@@ -242,7 +261,7 @@ function inicializarScrollReveal() {
 
 
 /* ================================================================
-   5. MICROINTERACCIONES
+  5. MICROINTERACCIONES
 ================================================================ */
 
 /**
@@ -387,7 +406,7 @@ function inicializarContadores() {
 
 
 /* ================================================================
-   6. FOOTER — Año dinámico
+  6. FOOTER — Año dinámico
 ================================================================ */
 
 function inicializarAnio() {
@@ -397,7 +416,7 @@ function inicializarAnio() {
 
 
 /* ================================================================
-   7. SMOOTH SCROLL — Anclas internas
+  7. SMOOTH SCROLL — Anclas internas
 ================================================================ */
 
 function inicializarSmoothScroll() {
@@ -427,7 +446,7 @@ function inicializarSmoothScroll() {
 
 
 /* ================================================================
-   INIT — Punto de entrada principal
+  INIT — Punto de entrada principal
 ================================================================ */
 
 function init() {
