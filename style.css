@@ -241,14 +241,14 @@ button {
   height: var(--header-h);
   display: flex;
   align-items: center;
-  background: transparent;
+  background: #1a1a18f0;
   transition: background var(--duration) var(--ease-out),
               box-shadow var(--duration) var(--ease-out),
               backdrop-filter var(--duration) var(--ease-out);
 }
 
 .site-header.scrolled {
-  background: rgba(26, 26, 24, 0.94);
+  background: #1a1a18f0;
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
   box-shadow: 0 1px 0 rgba(255,255,255,0.06);
@@ -1290,4 +1290,11 @@ button {
     flex-direction: column;
   }
   .btn { justify-content: center; }
+}
+
+.logo-img {
+  width: 75px;
+  height: 75px;
+  object-fit: contain;
+  border-radius: 4px;
 }
