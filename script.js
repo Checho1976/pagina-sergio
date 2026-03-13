@@ -39,47 +39,52 @@ const PROYECTOS = [
   // ─────────────────────────────────────────────────────────────────
 
   {
-    titulo:      'REEMPLAZÁ: nombre del trabajo · barrio',  // ← cambiá esto
-    categoria:   'Electricidad',                             // ← categoría del servicio
-    descripcion: 'REEMPLAZÁ: descripción breve del trabajo realizado.',
-    imagen:      'fotos/proyecto-01.jpg',                    // ← ruta o URL de tu foto
-    alt:         'Descripción de la foto para accesibilidad',
-  },
-  {
-    titulo:      'REEMPLAZÁ: nombre del trabajo · barrio',
-    categoria:   'Construcción en Yeso',
-    descripcion: 'REEMPLAZÁ: descripción breve del trabajo realizado.',
-    imagen:      'fotos/proyecto-02.jpg',
-    alt:         'Descripción de la foto para accesibilidad',
-  },
-  {
-    titulo:      'REEMPLAZÁ: nombre del trabajo · barrio',
-    categoria:   'Automatismos y Portones',
-    descripcion: 'REEMPLAZÁ: descripción breve del trabajo realizado.',
-    imagen:      'fotos/proyecto-03.jpg',
-    alt:         'Descripción de la foto para accesibilidad',
-  },
-  {
-    titulo:      'REEMPLAZÁ: nombre del trabajo · barrio',
-    categoria:   'Jardines y Espacios Verdes',
-    descripcion: 'REEMPLAZÁ: descripción breve del trabajo realizado.',
-    imagen:      'fotos/proyecto-04.jpg',
-    alt:         'Descripción de la foto para accesibilidad',
-  },
-  {
-    titulo:      'REEMPLAZÁ: nombre del trabajo · barrio',
-    categoria:   'Pintura y Pisos',
-    descripcion: 'REEMPLAZÁ: descripción breve del trabajo realizado.',
-    imagen:      'fotos/proyecto-05.jpg',
-    alt:         'Descripción de la foto para accesibilidad',
-  },
-  {
-    titulo:      'REEMPLAZÁ: nombre del trabajo · barrio',
-    categoria:   'Plomería y Mantenimiento',
-    descripcion: 'REEMPLAZÁ: descripción breve del trabajo realizado.',
-    imagen:      'fotos/proyecto-06.jpg',
-    alt:         'Descripción de la foto para accesibilidad',
-  },
+  titulo:      'Tablero nuevo · Pocitos',
+  categoria:   'Electricidad',
+  descripcion: 'Renovación completa del tablero eléctrico en apartamento de Pocitos. Instalación de diferencial y termomagnéticas nuevas con cableado ordenado y seguro. Trabajo terminado en medio día.',
+  imagen:      'img/proyecto1.jpg',
+  alt:         'Tablero eléctrico renovado en vivienda de Pocitos',
+},
+
+{
+  titulo:      'Cielorraso liso · Cordón',
+  categoria:   'Construcción en Yeso',
+  descripcion: 'Instalación y terminación de cielorraso de yeso en dormitorio de apartamento en Cordón. Superficie completamente alisada con moldura perimetral y lista para pintar.',
+  imagen:      'img/proyecto2.jpg',
+  alt:         'Cielorraso de yeso terminado en apartamento de Cordón',
+},
+
+{
+  titulo:      'Portón automático · Carrasco Norte',
+  categoria:   'Automatismos y Portones',
+  descripcion: 'Instalación de automatismo en portón corredizo en vivienda de Carrasco Norte. Colocación de motor, riel y sistema de control remoto para apertura suave y silenciosa.',
+  imagen:      'img/proyecto3.jpg',
+  alt:         'Portón corredizo automático instalado en vivienda de Carrasco Norte',
+},
+
+{
+  titulo:      'Jardín prolijo · Parque del Plata',
+  categoria:   'Jardines',
+  descripcion: 'Mantenimiento completo de jardín en casa de Parque del Plata. Corte de césped, poda de arbustos y limpieza de canteros para dejar el espacio ordenado y prolijo.',
+  imagen:      'img/proyecto4.jpg',
+  alt:         'Jardín mantenido y césped recién cortado en Parque del Plata',
+},
+
+{
+  titulo:      'Pared recién pintada · Unión',
+  categoria:   'Pintura',
+  descripcion: 'Pintura interior de paredes en vivienda del barrio Unión. Aplicación de pintura nueva con terminación uniforme y preparación previa de la superficie.',
+  imagen:      'img/proyecto5.jpg',
+  alt:         'Pared interior recién pintada en vivienda del barrio Unión',
+},
+
+{
+  titulo:      'Cisterna reparada · La Blanqueada',
+  categoria:   'Plomería y Mantenimiento',
+  descripcion: 'Reparación de cisterna y cambio de cañería en baño de vivienda en La Blanqueada. Instalación de piezas nuevas y ajuste completo para eliminar pérdidas de agua.',
+  imagen:      'img/proyecto6.jpg',
+  alt:         'Reparación de cisterna y cañería en baño de vivienda en La Blanqueada',
+},
 
   // ¿Más proyectos? Copiá uno de los bloques de arriba y pegalo acá.
   // La grilla se ajusta sola.

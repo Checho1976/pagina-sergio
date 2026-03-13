@@ -14,7 +14,7 @@
 
   --color-accent:      #d4a017;
   --color-accent-dark: #b08810;
-  --color-accent-glow: rgba(212, 160, 23, 0.18);
+  --color-accent-glow: #d4a0172e;
 
   --color-green:       #2d5a3d;
   --color-green-light: #3a7a52;
@@ -38,7 +38,7 @@
   --radius-lg:  14px;
 
   /* Shadows */
-  --shadow-sm:  0 1px 4px rgba(0,0,0,0.08);
+  --shadow-sm:  0 1px 4px rgba(0, 0, 0, 0.08);
   --shadow-md:  0 4px 20px rgba(0,0,0,0.10);
   --shadow-lg:  0 12px 48px rgba(0,0,0,0.14);
   --shadow-xl:  0 24px 72px rgba(0,0,0,0.18);
