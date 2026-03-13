@@ -1,5 +1,29 @@
 /* ================================================================
-   VARIABLES & RESET
+  PROTECCIÓN GLOBAL CONTRA MODO OSCURO (ANDROID / SAMSUNG)
+================================================================ */
+
+/* fuerza modo claro */
+:root {
+  color-scheme: light;
+}
+
+/* evita que Android/Chrome cambie colores */
+html {
+  background: #ffffff !important;
+}
+
+body {
+  background: #fefefe !important;
+  color: #1a1a18 !important;
+}
+
+/* evita auto dark mode */
+* {
+  forced-color-adjust: none;
+}
+
+/* ================================================================
+  VARIABLES & RESET
 ================================================================ */
 :root {
   /* Colors */
@@ -1272,4 +1296,25 @@ button {
     flex-direction: column;
   }
   .btn { justify-content: center; }
+}
+
+/* ================================================================
+  BLOQUEO EXTRA PARA NAVEGADORES ANDROID
+================================================================ */
+
+@media (prefers-color-scheme: dark) {
+
+  html,
+  body {
+    background: #fefefe !important;
+    color: #1a1a18 !important;
+  }
+
+  img,
+  picture,
+  video,
+  svg {
+    filter: none !important;
+  }
+
 }
