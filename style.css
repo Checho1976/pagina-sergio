@@ -1,13 +1,10 @@
 /* ================================================================
-  PROTECCIÓN GLOBAL CONTRA MODO OSCURO (ANDROID / SAMSUNG)
+   PROTECCIÓN GLOBAL CONTRA MODO OSCURO (ANDROID / SAMSUNG)
 ================================================================ */
-
-/* fuerza modo claro */
 :root {
   color-scheme: light;
 }
 
-/* evita que Android/Chrome cambie colores */
 html {
   background: #ffffff !important;
 }
@@ -17,16 +14,14 @@ body {
   color: #1a1a18 !important;
 }
 
-/* evita auto dark mode */
 * {
   forced-color-adjust: none;
 }
 
 /* ================================================================
-  VARIABLES & RESET
+   VARIABLES & RESET
 ================================================================ */
 :root {
-  /* Colors */
   --color-dark:        #1a1a18;
   --color-dark-2:      #252520;
   --color-dark-3:      #2e2e28;
@@ -43,11 +38,9 @@ body {
   --color-green:       #2d5a3d;
   --color-green-light: #3a7a52;
 
-  /* Typography */
   --font-display: 'Barlow Condensed', sans-serif;
   --font-body:    'Barlow', sans-serif;
 
-  /* Spacing */
   --space-xs:   0.5rem;
   --space-sm:   1rem;
   --space-md:   1.5rem;
@@ -56,27 +49,22 @@ body {
   --space-2xl:  6rem;
   --space-3xl:  9rem;
 
-  /* Radii */
   --radius-sm:  4px;
   --radius-md:  8px;
   --radius-lg:  14px;
 
-  /* Shadows */
   --shadow-sm:  0 1px 4px rgba(0,0,0,0.08);
   --shadow-md:  0 4px 20px rgba(0,0,0,0.10);
   --shadow-lg:  0 12px 48px rgba(0,0,0,0.14);
   --shadow-xl:  0 24px 72px rgba(0,0,0,0.18);
 
-  /* Transitions */
   --ease-out:   cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in:    cubic-bezier(0.64, 0, 0.78, 0);
   --duration:   0.32s;
 
-  /* Layout */
   --container:  1240px;
   --header-h:   68px;
 
-  /* Bloquea modo oscuro del sistema */
   color-scheme: light only;
   forced-color-adjust: none;
 }
@@ -134,7 +122,6 @@ button {
   padding-inline: 1.25rem;
 }
 
-/* Scroll reveal base state */
 .reveal {
   opacity: 0;
   transform: translateY(32px);
@@ -335,59 +322,35 @@ button {
   text-transform: uppercase;
 }
 
-/* Nav */
-.main-nav ul {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-}
+/* ================================================================
+   NAV — lógica mobile-first
+   El botón arranca VISIBLE y el nav arranca OCULTO.
+   En desktop (>= 1024px) se invierte.
+================================================================ */
 
-.main-nav a {
-  font-family: var(--font-display);
-  font-size: 0.88rem;
-  font-weight: 600;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.75);
-  padding: 0.5rem 0.85rem;
-  border-radius: var(--radius-sm);
-  transition: color var(--duration), background var(--duration);
-}
-
-.main-nav a:hover { color: #fefefe; background: rgba(255,255,255,0.08); }
-
-.main-nav .nav-cta {
-  color: #1a1a18;
-  background: #d4a017;
-  padding: 0.5rem 1.1rem;
-}
-
-.main-nav .nav-cta:hover {
-  background: #b08810;
-  color: #1a1a18;
-}
-
-/* Hamburger */
+/* Hamburger — visible por defecto (mobile first) */
 .nav-toggle {
-  display: none;
+  display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 5px;
-  width: 40px;
-  height: 40px;
-  padding: 0.4rem;
+  width: 44px;
+  height: 44px;
+  padding: 0.5rem;
   border-radius: var(--radius-sm);
   transition: background var(--duration);
   z-index: 300;
   position: relative;
+  flex-shrink: 0;
 }
 
 .nav-toggle:hover { background: rgba(255,255,255,0.1); }
 
 .nav-toggle span {
   display: block;
+  width: 100%;
   height: 2px;
-  background: #fefefe;
+  background: #ffffff;
   border-radius: 2px;
   transition: transform var(--duration) var(--ease-out),
               opacity var(--duration);
@@ -397,6 +360,71 @@ button {
 .nav-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .nav-toggle.is-open span:nth-child(2) { opacity: 0; }
 .nav-toggle.is-open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Nav — oculto por defecto (mobile), se muestra al abrir */
+.main-nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  min-height: 100svh;
+  background: rgba(26, 26, 24, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  z-index: 250;
+  overflow: hidden;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
+  transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
+}
+
+.main-nav.is-open {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+.main-nav ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.main-nav a {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.85);
+  padding: 0.75rem 1.5rem;
+  border-radius: var(--radius-sm);
+  transition: color var(--duration), background var(--duration);
+}
+
+.main-nav a:hover { color: #fefefe; background: rgba(255,255,255,0.08); }
+
+.main-nav .nav-cta {
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+  padding: 0.75rem 2rem;
+  color: #1a1a18;
+  background: #d4a017;
+}
+
+.main-nav .nav-cta:hover {
+  background: #b08810;
+  color: #1a1a18;
+}
 
 /* ================================================================
    HERO
@@ -1165,26 +1193,66 @@ button {
 
 /* ================================================================
    RESPONSIVE — DESKTOP (>= 1024px)
+   Acá ocultamos el botón y mostramos el nav horizontal
 ================================================================ */
 @media (min-width: 1024px) {
   .container { padding-inline: 2.5rem; }
 
-  .nav-toggle { display: none; }
+  /* Ocultar hamburger en desktop */
+  .nav-toggle {
+    display: none !important;
+  }
 
+  /* Nav horizontal — anula todos los estilos mobile */
   .main-nav {
     display: flex !important;
-    position: static;
-    background: none;
-    padding: 0;
-    overflow: visible;
+    flex-direction: row !important;
+    position: static !important;
+    width: auto !important;
+    height: auto !important;
+    min-height: unset !important;
+    background: none !important;
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
     visibility: visible !important;
     opacity: 1 !important;
     pointer-events: auto !important;
     transform: none !important;
-    transition: none;
-    min-height: unset;
-    width: auto;
-    height: auto;
+    transition: none !important;
+    overflow: visible !important;
+    z-index: auto !important;
+  }
+
+  .main-nav ul {
+    flex-direction: row !important;
+    align-items: center;
+    gap: 0.25rem;
+  }
+
+  .main-nav a {
+    font-size: 0.88rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 0.5rem 0.85rem;
+    color: rgba(255,255,255,0.75);
+  }
+
+  .main-nav a:hover {
+    color: #fefefe;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .main-nav .nav-cta {
+    margin-top: 0;
+    font-size: 0.88rem;
+    padding: 0.5rem 1.1rem;
+    color: #1a1a18;
+    background: #d4a017;
+  }
+
+  .main-nav .nav-cta:hover {
+    background: #b08810;
+    color: #1a1a18;
   }
 
   .servicios-grid {
@@ -1206,61 +1274,9 @@ button {
 }
 
 /* ================================================================
-   RESPONSIVE — MOBILE (< 768px)
+   AJUSTES MOBILE EXTRA (< 768px)
 ================================================================ */
 @media (max-width: 767px) {
-  .nav-toggle { display: flex; }
-
-  .main-nav {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    min-height: 100svh;
-    background: rgba(26, 26, 24, 0.98);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    z-index: 250;
-    overflow: hidden;
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(-8px);
-    transition: opacity 0.3s ease, visibility 0.3s ease, transform 0.3s ease;
-  }
-
-  .main-nav.is-open {
-    visibility: visible;
-    opacity: 1;
-    pointer-events: auto;
-    transform: translateY(0);
-  }
-
-  .main-nav ul {
-    flex-direction: column;
-    align-items: center;
-    gap: 0.5rem;
-  }
-
-  .main-nav a {
-    font-size: 1.6rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    padding: 0.75rem 1.5rem;
-    color: rgba(255,255,255,0.85);
-  }
-
-  .main-nav .nav-cta {
-    margin-top: 0.5rem;
-    font-size: 1.1rem;
-    padding: 0.75rem 2rem;
-  }
-
   .hero-inner { padding-block: var(--space-xl) var(--space-lg); }
 
   .hero-trust {
@@ -1299,22 +1315,15 @@ button {
 }
 
 /* ================================================================
-  BLOQUEO EXTRA PARA NAVEGADORES ANDROID
+  BLOQUEO EXTRA MODO OSCURO ANDROID
 ================================================================ */
-
 @media (prefers-color-scheme: dark) {
-
-  html,
-  body {
+  html, body {
     background: #fefefe !important;
     color: #1a1a18 !important;
   }
 
-  img,
-  picture,
-  video,
-  svg {
+  img, picture, video, svg {
     filter: none !important;
   }
-
 }
