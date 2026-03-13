@@ -80,7 +80,7 @@ const PROYECTOS = [
 
 {
   titulo:      'Instalación de calefón · Ciudad Vieja',
-  categoria:   'Plomería e Instalación de aparatos en hogar',
+  categoria:   'Plomería e Instalación de aparatos del hogar',
   descripcion: 'Instalación de calefón y adecuación de conexiones en vivienda. Montaje seguro del equipo, conexión de entrada y salida de agua con materiales termofusión y sellado hermético para garantizar un funcionamiento óptimo y sin filtraciones.',
   imagen:      './img/proyecto6.jpg',
   alt:         'Instalación de calefón en Ciudad Vieja',
