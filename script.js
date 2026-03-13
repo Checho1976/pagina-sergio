@@ -63,11 +63,11 @@ const PROYECTOS = [
 },
 
 {
-  titulo:      'Jardín prolijo · Parque del Plata',
+  titulo:      'Jardín prolijo · Las Piedras',
   categoria:   'Jardines',
-  descripcion: 'Mantenimiento completo de jardín en casa de Parque del Plata. Corte de césped, poda de arbustos y limpieza de canteros para dejar el espacio ordenado y prolijo.',
+  descripcion: 'Mantenimiento completo de jardín en casa de Las Piedras. Corte de césped, poda de arbustos y limpieza de canteros para dejar el espacio ordenado y prolijo.',
   imagen:      './img/proyecto4.JPG',
-  alt:         'Jardín mantenido y césped recién cortado en Parque del Plata',
+  alt:         'Jardín mantenido y césped recién cortado en Las Piedras',
 },
 
 {
@@ -79,11 +79,11 @@ const PROYECTOS = [
 },
 
 {
-  titulo:      'Cisterna reparada · La Blanqueada',
-  categoria:   'Plomería y Mantenimiento',
-  descripcion: 'Reparación de cisterna y cambio de cañería en baño de vivienda en La Blanqueada. Instalación de piezas nuevas y ajuste completo para eliminar pérdidas de agua.',
+  titulo:      'Instalación de calefón · Ciudad Vieja',
+  categoria:   'Plomería e Instalación de aparatos en hogar',
+  descripcion: 'Instalación de calefón y adecuación de conexiones en vivienda. Montaje seguro del equipo, conexión de entrada y salida de agua con materiales termofusión y sellado hermético para garantizar un funcionamiento óptimo y sin filtraciones.',
   imagen:      './img/proyecto6.JPG',
-  alt:         'Reparación de cisterna y cañería en baño de vivienda en La Blanqueada',
+  alt:         'Instalación de calefón en Ciudad Vieja',
 },
 
   // ¿Más proyectos? Copiá uno de los bloques de arriba y pegalo acá.
