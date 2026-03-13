@@ -207,6 +207,8 @@ button {
   background: var(--color-accent);
   color: var(--color-dark);
   box-shadow: 0 4px 24px rgba(212, 160, 23, 0.35);
+  -webkit-text-fill-color: var(--color-dark);
+  color: var(--color-dark);
 }
 
 .btn-primary:hover {
@@ -1297,4 +1299,21 @@ button {
   height: 75px;
   object-fit: contain;
   border-radius: 4px;
+}
+
+/* ================================================================
+  FORZAR COLORES — evita que Android altere la paleta
+================================================================ */
+@media (prefers-color-scheme: dark) {
+  :root {
+    color-scheme: light;
+  }
+  body {
+    background-color: var(--color-white);
+    color: var(--color-dark);
+  }
+  .btn-primary {
+    background: var(--color-accent) !important;
+    color: var(--color-dark) !important;
+  }
 }
