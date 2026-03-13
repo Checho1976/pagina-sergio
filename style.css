@@ -333,28 +333,35 @@ button {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 5px;
   width: 44px;
+  min-width: 44px;
   height: 44px;
-  padding: 0.5rem;
+  min-height: 44px;
+  padding: 0;
   border-radius: var(--radius-sm);
   transition: background var(--duration);
   z-index: 300;
   position: relative;
   flex-shrink: 0;
+  -webkit-appearance: none;
+  appearance: none;
 }
 
 .nav-toggle:hover { background: rgba(255,255,255,0.1); }
 
 .nav-toggle span {
   display: block;
-  width: 100%;
+  width: 22px;
   height: 2px;
   background: #ffffff;
   border-radius: 2px;
+  flex-shrink: 0;
   transition: transform var(--duration) var(--ease-out),
               opacity var(--duration);
   transform-origin: center;
+  -webkit-transform-origin: center;
 }
 
 .nav-toggle.is-open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
@@ -1315,7 +1322,7 @@ button {
 }
 
 /* ================================================================
-  BLOQUEO EXTRA MODO OSCURO ANDROID
+   BLOQUEO EXTRA MODO OSCURO ANDROID
 ================================================================ */
 @media (prefers-color-scheme: dark) {
   html, body {
