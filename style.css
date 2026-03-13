@@ -54,6 +54,7 @@
 
   /* Bloquea modo oscuro del sistema */
   color-scheme: light only;
+  forced-color-adjust: none;
 }
 
 *, *::before, *::after {
