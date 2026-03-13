@@ -50,7 +50,7 @@ const PROYECTOS = [
   titulo:      'Cielorraso liso · Cordón',
   categoria:   'Construcción en Yeso',
   descripcion: 'Instalación y terminación de cielorraso de yeso en dormitorio de apartamento en Cordón. Superficie completamente alisada con moldura perimetral y lista para pintar.',
-  imagen:      './img/proyecto2.jpg',
+  imagen:      './img/proyecto2.JPG',
   alt:         'Cielorraso de yeso terminado en apartamento de Cordón',
 },
 
@@ -58,7 +58,7 @@ const PROYECTOS = [
   titulo:      'Portón automático · Carrasco Norte',
   categoria:   'Automatismos y Portones',
   descripcion: 'Instalación de automatismo en portón corredizo en vivienda de Carrasco Norte. Colocación de motor, riel y sistema de control remoto para apertura suave y silenciosa.',
-  imagen:      './img/proyecto3.jpg',
+  imagen:      './img/proyecto3.JPG',
   alt:         'Portón corredizo automático instalado en vivienda de Carrasco Norte',
 },
 
@@ -66,7 +66,7 @@ const PROYECTOS = [
   titulo:      'Jardín prolijo · Parque del Plata',
   categoria:   'Jardines',
   descripcion: 'Mantenimiento completo de jardín en casa de Parque del Plata. Corte de césped, poda de arbustos y limpieza de canteros para dejar el espacio ordenado y prolijo.',
-  imagen:      './img/proyecto4.jpg',
+  imagen:      './img/proyecto4.JPG',
   alt:         'Jardín mantenido y césped recién cortado en Parque del Plata',
 },
 
@@ -74,7 +74,7 @@ const PROYECTOS = [
   titulo:      'Pared recién pintada · Unión',
   categoria:   'Pintura',
   descripcion: 'Pintura interior de paredes en vivienda del barrio Unión. Aplicación de pintura nueva con terminación uniforme y preparación previa de la superficie.',
-  imagen:      './img/proyecto5.jpg',
+  imagen:      './img/proyecto5.JPG',
   alt:         'Pared interior recién pintada en vivienda del barrio Unión',
 },
 
@@ -82,7 +82,7 @@ const PROYECTOS = [
   titulo:      'Cisterna reparada · La Blanqueada',
   categoria:   'Plomería y Mantenimiento',
   descripcion: 'Reparación de cisterna y cambio de cañería en baño de vivienda en La Blanqueada. Instalación de piezas nuevas y ajuste completo para eliminar pérdidas de agua.',
-  imagen:      './img/proyecto6.jpg',
+  imagen:      './img/proyecto6.JPG',
   alt:         'Reparación de cisterna y cañería en baño de vivienda en La Blanqueada',
 },
 
