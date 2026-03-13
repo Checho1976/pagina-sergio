@@ -42,7 +42,7 @@ const PROYECTOS = [
   titulo:      'Tablero nuevo · Pocitos',
   categoria:   'Electricidad',
   descripcion: 'Renovación completa del tablero eléctrico en apartamento de Pocitos. Instalación de diferencial y termomagnéticas nuevas con cableado ordenado y seguro. Trabajo terminado en medio día.',
-  imagen:      'img/proyecto1.jpg',
+  imagen:      'img/proyecto1.JPG',
   alt:         'Tablero eléctrico renovado en vivienda de Pocitos',
 },
 
